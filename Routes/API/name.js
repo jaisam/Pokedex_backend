@@ -23,3 +23,8 @@ router.get('/:inputName', (req,res) => {
         res.status(400).json({ msg: error.msg});
     }
 });
+
+// Creating Pokemon 
+router.post('/', async (req,res) => {
+    
+})

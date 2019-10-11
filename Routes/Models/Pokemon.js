@@ -1,7 +1,18 @@
 const mongoose = require('mongoose');
 
-const PokemonSchema = mongoose.Schema({
+const next_evolution_schema = mongoose.Schema({
+    num: {
+        type : String 
+    },
+    name: {
+        type : String 
+    }
+})
 
+const PokemonSchema = mongoose.Schema({
+        id : {
+            type : Number
+        },
         num: {
             type : String,
             required : true 
@@ -50,10 +61,19 @@ const PokemonSchema = mongoose.Schema({
             required : true 
         },
         next_evolution: {
-            type : Array,
-            "default" : []
+            type : [next_evolution_schema],
+            default : []
+        },
+        status : {
+            type : String,
+            default : 'active'
+        },
+        lastUpdated : {
+            type : Date,
+            default : Date.now
         }
-
 });
+
+
 
 module.exports = mongoose.model('Pokemon', PokemonSchema);
