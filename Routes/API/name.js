@@ -1,5 +1,7 @@
 // Importing modules using require keyword
 const express = require('express');
+const Pokemon = require('../../Models/Pokemon');
+
 
 // Using Express's Router (Very Important)
 /* 
@@ -16,15 +18,50 @@ module.exports = router;
 // API's
 
 // Getting Specifc Pokemon by using name Parameter sent in request
-router.get('/:inputName', (req,res) => {
+router.get('/:inputName', async (req,res) => {
     try {
-        res.send(req.params.inputName);
-    }catch(error) {
-        res.status(400).json({ msg: error.msg});
+        
+        let input = /^req.params.inputName/i ;
+        //console.log(input);
+
+        const pokemons = await Pokemon.find({ name :  input }); 
+        //console.log(pokemons);
+
+        res.json(pokemons);
+
+    } catch(error) {
+        res.status(400).json({ msg: error });
     }
 });
 
-// Creating Pokemon 
-router.post('/', async (req,res) => {
-    
-})
+// This method is created just to put pokemonData into Database through Postman 
+router.post('/',  (req,res) => {
+
+/*  This method throws error, member.save is not a function
+
+    let pokemonsData = new Pokemon([{}]);
+    pokemonsData = req.body.data;
+    try {
+        pokemonsData.forEach( async (member) => {
+            // console.log(member);
+             const savedData = await member.save();
+             console.log(savedData);
+        });
+    } catch (error) {
+        res.status(400).json({ msg : error.msg });
+    }
+*/
+
+/*      This method works       */
+    try {
+        req.body.data.forEach( async (member) => {
+            //console.log(member);
+            let pokemonsData = new Pokemon(member);
+             //console.log(pokemonsData);
+             const savedData = await pokemonsData.save();
+             res.json({ savedData });
+        });
+    } catch (error) {
+        res.status(400).json({ msg : error.msg });
+    } 
+});
