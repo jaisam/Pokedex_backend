@@ -20,15 +20,17 @@ module.exports = router;
 // Getting Specifc Pokemon by using name Parameter sent in request
 router.get('/:inputName', async (req,res) => {
     try {
-        
-        let input = /^req.params.inputName/i ;
-        //console.log(input);
+        // creating regex pattern by adding inputName parameter
+        const nameRegex = new RegExp(`^${req.params.inputName}`, 'i');
 
-        const pokemons = await Pokemon.find({ name :  input }); 
-        //console.log(pokemons);
+        //finding pokemon using regExp
+        const pokemons = await Pokemon.find({ name : nameRegex }); 
 
-        res.json(pokemons);
-
+        if(pokemons.length>0) {
+            res.json(pokemons);
+        } else {
+            res.json({ msg : 'Pokemon does not exist with such name '});
+        }
     } catch(error) {
         res.status(400).json({ msg: error });
     }
