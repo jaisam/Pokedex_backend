@@ -30,6 +30,7 @@ router.get('/:type(name|type|weakness)/', async (req,res) => {
         //res.send('We are on default route');
         const allPokemons = await Pokemon.find().sort({ id : 1 });
         res.json(allPokemons);
+        console.log(allPokemons)
 
     } catch(error) {
         res.status(400).json({ msg : error.msg });
