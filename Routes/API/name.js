@@ -95,13 +95,13 @@ router.put('/:num' , async (req,res) => {
                 });
         
     // if data updated successfully, then send response or error messages 
-    if ( updData ) {
+    if ( updData.n !=0 ) {
         res.json( updData );
     }
     else {
-        res.json({ msg : `Cannot update as Pokemon with ${num} number does not exist`});
+        res.json({ msg : `Cannot update as Pokemon with ${inputNum} number does not exist`});
     }
-
+ 
     } catch (error) {
         res.status(400).json({ msg : error.msg });
     }
