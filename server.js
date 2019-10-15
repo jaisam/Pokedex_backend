@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Pokemon = require('./Models/Pokemon');
+const cors = require('cors');
 
 // Init Express app
 const app = express();
@@ -21,12 +22,16 @@ const typeRoute = require('./Routes/API/type');
 const weaknessRoute = require('./Routes/API/weakness');
 
 
+// CORS middleware
+app.use(cors());
+
 // Body Parser middleware. 
 /*
     Bodyparser should be before ROUTES middleware else it wont parse req.body 
 */
 app.use(express.json());
 app.use(express.urlencoded({ extended : false }));
+
 
 // ROUTES middleware
 app.use('/' , defaultRoute);
