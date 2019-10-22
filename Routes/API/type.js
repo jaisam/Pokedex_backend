@@ -30,7 +30,9 @@ router.get('/:inputType' , async (req,res) => {
         // });
 
         if (pokemons.length>0){
-            res.json(pokemons);
+            res.json({
+                msg: 'Successfully retrieved Pokemon data ',
+                pokemon: pokemons});
         } 
         else {
             res.json({ msg : 'No such Type exists' });
