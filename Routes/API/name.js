@@ -56,11 +56,13 @@ router.post('/', (req, res) => {
 
     /*      This method works       */
     try {
+        console.log('Inside post');
         req.body.data.forEach(async (member) => {
             //console.log(member);
             let pokemonsData = new Pokemon(member);
-            //console.log(pokemonsData);
+            console.log(pokemonsData);
             const savedData = await pokemonsData.save();
+            console.log(savedData);
             res.json({ savedData });
         });
     } catch (error) {
