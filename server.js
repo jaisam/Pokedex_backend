@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// ROUTES middleware
+// ROUTES middleware 
 app.use('/', defaultRoute);
 app.use('/name', nameRoute);
 app.use('/type', typeRoute);
