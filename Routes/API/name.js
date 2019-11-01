@@ -16,12 +16,13 @@ module.exports = router;
 // [start] API Function to get Specifc Pokemon data by using name Parameter sent in request
 router.get('/:inputName', async (req, res) => {
     try {
+        console.log('Inside get');
         // creating regex pattern by adding inputName parameter
         const nameRegex = new RegExp(`^${req.params.inputName}`, 'i');
-
+        console.log(nameRegex);
         //finding pokemon using regExp
         const pokemons = await Pokemon.find({ name: nameRegex });
-
+        console.log(pokemons);
         if (pokemons.length > 0) {
             res.json({
                 msg: 'Successfully retrieved Pokemon data ',

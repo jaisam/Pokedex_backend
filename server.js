@@ -7,7 +7,7 @@ require('dotenv').config();
 
 // Init Express app
 const app = express();
-mongoose.connect(process.env.database_url, //'mongodb://localhost/Pokemon', 
+mongoose.connect(process.env.database_url, 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -19,10 +19,9 @@ db.on('error', (error) => console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('connnection successful'));
 
 
-const PORT = 3000;
 
 // Listening to PORT
-app.listen(process.env.PORT || PORT, () => console.log(`Server started on ${PORT}`));
+app.listen(process.env.PORT || process.env.port, () => console.log(`Server started on ${process.env.port}`));
 
 // Importing ROUTES
 const defaultRoute = require('./Routes/API/default');
